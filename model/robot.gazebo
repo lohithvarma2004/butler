@@ -1,0 +1,80 @@
+<?xml version="1.0"?> 
+<robot>
+  <gazebo reference="body_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="wheel1_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="wheel2_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <!-- Corrected the reference name: removed extra space -->
+  <gazebo reference="caster_link">
+    <mu1>0.000002</mu1>
+    <mu2>0.000002</mu2>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+ 
+  <gazebo reference="laser_frame">
+    <material>Gazebo/Red</material>
+    <sensor name="laser" type="ray">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.3</min>
+          <max>12</max>
+        </range>
+      </ray>
+      <plugin name="laser_controller" filename="libgazebo_ros_laser.so">
+        <ros>
+          <argument>~/out:=/scan</argument>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>laser_frame</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+  <gazebo>
+    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+      <ros>
+        <namespace></namespace>
+      </ros>
+      <num_wheel_pairs>1</num_wheel_pairs>
+      <!-- Wheels: note that left_joint and right_joint are assigned as intended -->
+      <left_joint>wheel2_joint</left_joint>
+      <right_joint>wheel1_joint</right_joint>
+      <!-- Using body_link_x_dim (defined in your main xacro file) instead of undefined body_link_dim -->
+      <wheel_separation>${body_link_x_dim + wheel_link_length}</wheel_separation>
+      <!-- Corrected spelling of wheel_diameter and set it to twice the wheel radius -->
+      <wheel_diameter>${2 * wheel_link_radius}</wheel_diameter>
+      <max_wheel_torque>1000</max_wheel_torque>
+      <max_wheel_acceleration>5.0</max_wheel_acceleration>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>dummy</robot_base_frame>
+    </plugin>
+  </gazebo>
+</robot>
