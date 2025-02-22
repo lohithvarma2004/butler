@@ -50,7 +50,7 @@
  </xacro:macro>
 
 
-  <xacro:include filename="$(find mobile_dd_robot)/model/robot.gazebo"/>
+  <xacro:include filename="$(find butler)/model/robot.gazebo"/>
 
   <link name="dummy"/>
   <joint name="dummy_joint" type="fixed">
