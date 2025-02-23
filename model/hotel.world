@@ -677,7 +677,7 @@
       <static>1</static>
     </model>
     <model name='table_3'>
-      <pose>6.93571 2.44928 0.5 0 -0 0</pose>
+      <pose>7.3 2.7 0.5 0 -0 0</pose>
       <link name='link'>
         <inertial>
           <mass>1</mass>
@@ -730,7 +730,7 @@
       </link>
     </model>
     <model name='table_2'>
-      <pose>7.02991 -1.97827 0.5 0 -0 0</pose>
+      <pose>7.3 -1.97827 0.5 0 -0 0</pose>
       <link name='link'>
         <inertial>
           <mass>1</mass>
@@ -783,7 +783,7 @@
       </link>
     </model>
     <model name='table_1'>
-      <pose>6.9357 -6.38227 0.5 0 -0 0</pose>
+      <pose>7.2 -5.7 0.5 0 -0 0</pose>
       <link name='link'>
         <inertial>
           <mass>1</mass>
